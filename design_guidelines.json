@@ -1,0 +1,152 @@
+{
+  "project_name": "Renewable Energy Observatory & Interactive Education App",
+  "design_archetype": {
+    "name": "Technical Observatory & Clean Energy Telemetry",
+    "vibe": "High-precision command center meets interactive scientific laboratory",
+    "dark_theme": {
+      "background_primary": "#0A0E17",
+      "background_secondary": "#111827",
+      "surface_card": "rgba(15, 23, 42, 0.75)",
+      "surface_border": "rgba(0, 217, 255, 0.18)",
+      "text_primary": "#F8FAFC",
+      "text_secondary": "#94A3B8",
+      "text_muted": "#64748B"
+    },
+    "light_theme": {
+      "background_primary": "#F8FAFC",
+      "background_secondary": "#F1F5F9",
+      "surface_card": "rgba(255, 255, 255, 0.90)",
+      "surface_border": "rgba(14, 116, 144, 0.20)",
+      "text_primary": "#0F172A",
+      "text_secondary": "#334155",
+      "text_muted": "#64748B"
+    },
+    "accents": {
+      "cyan_electric": "#00D9FF",
+      "amber_solar": "#FFB627",
+      "emerald_hydro": "#10B981",
+      "violet_storage": "#A855F7",
+      "rose_thermal": "#F43F5E"
+    }
+  },
+  "typography": {
+    "heading_font": "Outfit, sans-serif",
+    "mono_font": "JetBrains Mono, Space Mono, monospace",
+    "body_font": "Manrope, sans-serif",
+    "forbidden_fonts": ["Inter for headings", "Space Grotesk for dashboard text"],
+    "hierarchy": {
+      "hero_h1": "text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight leading-tight",
+      "section_h2": "text-2xl sm:text-3xl lg:text-4xl font-semibold tracking-tight",
+      "subsection_h3": "text-xl sm:text-2xl font-medium",
+      "card_h4": "text-lg sm:text-xl font-semibold",
+      "body": "text-base leading-relaxed",
+      "caption_mono": "font-mono text-xs uppercase tracking-widest text-cyan-400"
+    }
+  },
+  "layout_and_spacing": {
+    "philosophy": "Generous technical padding with crisp structural borders and grid alignment.",
+    "container_padding": "p-4 sm:p-6 lg:p-8",
+    "grid_modes": {
+      "mode_a_tetris": "grid-cols-1 md:grid-cols-8 lg:grid-cols-12 gap-6 lg:gap-8 for feature highlights & storytelling",
+      "mode_b_high_density": "grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4 lg:gap-6 for telemetry & interactive labs"
+    },
+    "card_padding_rule": "Containers with borders MUST maintain internal padding (p-6 or p-8) to prevent edge collision."
+  },
+  "shell_and_navigation": {
+    "header": {
+      "style": "Glassmorphism header (backdrop-blur-xl bg-slate-900/80 light:bg-white/80 border-b border-cyan-500/20 z-50 sticky top-0)",
+      "brand": "Logo with glowing cyan pulsing status dot + 'HELIOS' Observatory title",
+      "desktop_nav": "Visible links: Observatory Grid, Energy Sim, Storage Lab, Microgrid Sandbox, Global Matrix, Career Atlas, Feedback Hub",
+      "actions": "Light/Dark theme toggle + Interactive Guided Tour CTA"
+    },
+    "footer": {
+      "style": "Dark structural footer with 1px top border, grid details, ASCII telemetry status, and link matrices",
+      "cta": "Massive 'Join the Energy Transition' bold footer banner with text-4xl responsive typography"
+    }
+  },
+  "seven_core_areas": {
+    "area_1_live_observatory_grid": {
+      "name": "Live Grid Telemetry Observatory",
+      "description": "Real-time energy generation dashboard with live dynamic gauge charts, power flow node maps, and carbon intensity metrics.",
+      "layout": "High Density Grid (Mode B). Metric summary cards (col-span-1), telemetry chart (col-span-2 row-span-2), node feed (col-span-1 row-span-2).",
+      "components": ["Recharts area/bar charts", "Shadcn badge status", "Interactive region selector"]
+    },
+    "area_2_energy_physics_simulator": {
+      "name": "Solar & Wind Physics Interactive Calculator",
+      "description": "Educational simulator where users adjust irradiance, wind speed, panel angle, and turbine size to view immediate efficiency and MW yield outputs.",
+      "layout": "2-column laboratory view: Control Sliders on left (col-span-1), Visual Power Flow Output & SVG Simulation on right (col-span-2).",
+      "components": ["Custom styled HTML sliders with cyan track", "Real-time math readout", "Animated turbine/solar SVG"]
+    },
+    "area_3_microgrid_sandbox": {
+      "name": "Microgrid Resiliency Sandbox",
+      "description": "Drag-and-build sandbox for balancing municipal load with solar arrays, battery reserves, and generator backups during grid blackouts.",
+      "layout": "Interactive canvas grid with component inventory sidebar and dynamic stability meter.",
+      "components": ["Drag/Click node placing", "Capacity gauge meter", "Scenario simulator modal"]
+    },
+    "area_4_storage_dispatch_lab": {
+      "name": "Energy Storage & Dispatch Lab",
+      "description": "Deep dive into Li-ion batteries, Pumped Hydro, and Green Hydrogen storage technologies with efficiency curves and ramp time dynamics.",
+      "layout": "Comparative Tabbed Cards with interactive depth charts and charging cycle animations.",
+      "components": ["Shadcn Tabs", "Storage battery level visualizer", "Efficiency comparison table"]
+    },
+    "area_5_global_clean_matrix": {
+      "name": "Global Clean Energy Matrix & Atlas",
+      "description": "Interactive map/matrix showing country-level renewable penetration rates, climate policies, and mega-project case studies.",
+      "layout": "Filterable card grid with regional search, search input, and expandable drawer details.",
+      "components": ["Shadcn Select/Input", "Card grid with hover lift", "Modal drawer for case study"]
+    },
+    "area_6_career_policy_explorer": {
+      "name": "Renewable Career & Policy Path Explorer",
+      "description": "Interactive career roadmap tool connecting engineering, environmental policy, and field installation skills to real-world impact.",
+      "layout": "Timeline / Stepper layout with skill matrix badges and compensation insights.",
+      "components": ["Interactive step process", "Skill badges", "Filterable job categories"]
+    },
+    "area_7_community_feedback_hub": {
+      "name": "Community Research & Feedback Hub",
+      "description": "Placeholder Google Forms interface styled inside the observatory shell for educator feedback, student submissions, and feature requests.",
+      "layout": "Centered laboratory form card with custom Google Forms embed container, progress step indicators, and submission confirmation toast.",
+      "components": ["Shadcn Dialog/Form elements", "Embed container", "Sonner toast notification"]
+    }
+  },
+  "visual_enhancers_and_motion": {
+    "glassmorphism": "backdrop-blur-xl bg-slate-900/70 border border-cyan-500/20 shadow-[0_8px_32px_rgba(0,217,255,0.08)]",
+    "tracing_beam": "Glowing cyan/amber border highlights on active laboratory cards",
+    "ascii_art": "[GRID: ONLINE] [TELEMETRY: OPTIMAL] status banners in mono font",
+    "motion_rules": "Smooth transitions for interactive controls. Respect prefers-reduced-motion. Never use universal transition: all.",
+    "hover_contrast_rule": "Every hover state MUST explicitly define text color (e.g., hover:bg-cyan-500 hover:text-slate-950)."
+  },
+  "accessibility_and_testing": {
+    "contrast": "APCA/WCAG AA compliant (minimum 4.5:1 text contrast). Never use pure un-tinted dark hexes.",
+    "testing_attribute": "data-testid mandatory on all interactive controls (e.g., data-testid='solar-angle-slider', data-testid='grid-region-select', data-testid='theme-toggle-btn').",
+    "touch_targets": "Minimum 44px x 44px clickable areas for mobile responsiveness."
+  },
+  "image_urls": [
+    {
+      "category": "hero_and_wind",
+      "url": "https://images.pexels.com/photos/9800101/pexels-photo-9800101.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+      "description": "Wind turbines and solar panels generating renewable energy in a desert landscape."
+    },
+    {
+      "category": "wind_sunset",
+      "url": "https://images.pexels.com/photos/10333115/pexels-photo-10333115.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+      "description": "Silhouette of a wind turbine against a vibrant sunset sky."
+    },
+    {
+      "category": "solar_farm",
+      "url": "https://images.pexels.com/photos/38928940/pexels-photo-38928940.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+      "description": "Aerial view of a vast solar panel installation amidst a hilly landscape under sunset."
+    },
+    {
+      "category": "hydroelectric_dam",
+      "url": "https://images.pexels.com/photos/27623570/pexels-photo-27623570.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+      "description": "Powerful hydroelectric dam nestled in a rugged mountain landscape."
+    }
+  ],
+  "instructions_to_main_agent": [
+    "Ensure all 7 areas are accessible via the main navigation bar and responsive tabs/drawers.",
+    "Implement light mode and dark mode with high-contrast color variables.",
+    "Always add data-testid to buttons, sliders, tabs, selects, and inputs.",
+    "Do NOT hide header links behind desktop hamburger menu.",
+    "Use custom styled charts, sliders, and badges rather than generic standard layouts."
+  ]
+}
