@@ -24,7 +24,7 @@ Versioned browser constants live in `frontend/src/lib/energy.ts`: emissions fact
 
 ## Auth and roles
 
-No authentication or roles in v1.
+Optional Emergent-managed Google sign-in is available from the shared header and `/account`; public tools remain ungated. The frontend handles the one-use `#session_id` fragment synchronously with `useLocation().hash`, sends it to `POST /api/auth/session`, and never stores tokens. FastAPI exchanges the ID server-side, upserts a custom-UUID user, stores a seven-day session in MongoDB, and sets an httpOnly secure cookie. `/api/auth/me` is the session source of truth and `/api/auth/logout` clears the session. No roles/RBAC are implemented.
 
 ## Intentional limitations
 

@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
 import { NavLink, Outlet, useLocation } from "react-router-dom";
-import { Moon, Sun, Menu, X, RotateCcw, ExternalLink } from "lucide-react";
+import { Moon, Sun, Menu, X, RotateCcw, ExternalLink, LogIn, LogOut } from "lucide-react";
 import { STORAGE_KEYS, readLocal } from "@/lib/localState";
+import { endSession, startGoogleSignIn, useSession } from "@/lib/session";
 
 const nav = [
   ["/", "Observatory", "⌂"], ["/solar", "Solar tracker", "☼"], ["/journey", "Energy journey", "→"],
@@ -13,6 +14,7 @@ export default function AppShell() {
   const location = useLocation();
   const [dark, setDark] = useState(() => readLocal(STORAGE_KEYS.theme, "dark") === "dark");
   const [menuOpen, setMenuOpen] = useState(false);
+  const { data: user, isLoading: sessionLoading } = useSession();
 
   useEffect(() => {
     document.documentElement.classList.toggle("dark", dark);
@@ -40,6 +42,7 @@ export default function AppShell() {
             {nav.map(([path, label, icon]) => <NavItem key={path} path={path} label={label} icon={icon} />)}
           </nav>
           <div className="ml-auto flex items-center gap-2">
+            {sessionLoading ? <span className="hidden font-mono text-[10px] text-muted-foreground sm:block" data-testid="session-loading-label">SESSION…</span> : user ? <div className="flex items-center gap-1"><NavLink to="/account" className="hidden min-h-11 items-center gap-2 rounded-xl border border-border px-3 text-xs font-semibold hover:border-cyan-400 hover:text-cyan-400 sm:flex" data-testid="header-account-link"><span className="grid size-6 place-items-center overflow-hidden rounded-full bg-cyan-400/15 text-cyan-400">{user.picture ? <img src={user.picture} alt="" className="size-full object-cover" /> : "✦"}</span>{user.name}</NavLink><button type="button" onClick={() => void endSession()} className="grid size-11 place-items-center rounded-xl border border-border bg-card/70 text-muted-foreground hover:border-rose-400 hover:text-rose-400" aria-label="Sign out" data-testid="header-sign-out-button"><LogOut size={16} /></button></div> : <button type="button" onClick={startGoogleSignIn} className="hidden min-h-11 items-center gap-2 rounded-xl border border-cyan-400/35 bg-cyan-400/8 px-3 text-xs font-semibold text-cyan-400 hover:bg-cyan-400 hover:text-slate-950 sm:flex" data-testid="header-google-sign-in-button"><LogIn size={15} /> Sign in</button>}
             <button type="button" onClick={() => setDark((v) => !v)} className="grid size-11 place-items-center rounded-xl border border-border bg-card/70 text-muted-foreground hover:border-cyan-400/60 hover:text-cyan-500" aria-label={dark ? "Switch to light mode" : "Switch to dark mode"} data-testid="theme-toggle-button">{dark ? <Sun size={18} /> : <Moon size={18} />}</button>
             <button type="button" onClick={() => setMenuOpen((v) => !v)} className="grid size-11 place-items-center rounded-xl border border-border bg-card/70 text-muted-foreground hover:border-cyan-400/60 hover:text-cyan-500 xl:hidden" aria-label={menuOpen ? "Close navigation" : "Open navigation"} aria-expanded={menuOpen} data-testid="mobile-navigation-toggle">{menuOpen ? <X size={18} /> : <Menu size={18} />}</button>
           </div>

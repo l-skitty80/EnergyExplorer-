@@ -9,9 +9,14 @@ import CityGame from "@/pages/CityGame";
 import InformationHub from "@/pages/InformationHub";
 import Survey from "@/pages/Survey";
 import About from "@/pages/About";
+import Account from "@/pages/Account";
+import AuthCallback from "@/components/AuthCallback";
+import { useLocation } from "react-router-dom";
 
 // One <Route> per page in src/pages; BrowserRouter already wraps this in main.tsx.
 export default function App() {
+  const location = useLocation();
+  if (location.hash.includes("session_id=")) return <AuthCallback />;
   return (
     <Routes>
       <Route element={<AppShell />}>
@@ -24,6 +29,7 @@ export default function App() {
         <Route path="/learn" element={<InformationHub />} />
         <Route path="/survey" element={<Survey />} />
         <Route path="/about" element={<About />} />
+        <Route path="/account" element={<Account />} />
       </Route>
     </Routes>
   );

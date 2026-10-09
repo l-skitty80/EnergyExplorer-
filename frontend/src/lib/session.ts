@@ -1,19 +1,43 @@
-// Session boundary: auth is an httpOnly cookie the backend owns; the frontend's one
-// duty is wiping the react-query cache so one account's data never renders for the next.
-import { queryClient } from "./queryClient";
-import { apiPost } from "./api";
+import { useQuery } from "@tanstack/react-query";
+import { apiGet, apiPost, ApiError } from "@/lib/api";
+import { queryClient } from "@/lib/queryClient";
 
-// Call after every successful login/signup.
-export function beginSession(): void {
+export interface User {
+  user_id: string;
+  email: string;
+  name: string;
+  picture: string | null;
+}
+
+export const SESSION_QUERY_KEY = ["auth", "me"] as const;
+
+async function fetchCurrentUser(): Promise<User | null> {
+  try {
+    return await apiGet<User>("/auth/me");
+  } catch (error) {
+    if (error instanceof ApiError && error.status === 401) return null;
+    throw error;
+  }
+}
+
+export function useSession() {
+  return useQuery({ queryKey: SESSION_QUERY_KEY, queryFn: fetchCurrentUser, retry: false, staleTime: 60_000 });
+}
+
+export async function beginSession(sessionId: string) {
+  const user = await apiPost<User>("/auth/session", { session_id: sessionId });
+  queryClient.setQueryData(SESSION_QUERY_KEY, user);
+  return user;
+}
+
+export async function endSession() {
+  await apiPost<undefined>("/auth/logout");
+  await queryClient.cancelQueries();
   queryClient.clear();
 }
 
-// Call from every sign-out control; the hard redirect resets all in-memory state.
-export async function endSession(redirectTo: string = "/login"): Promise<void> {
-  try {
-    await apiPost("/auth/logout");
-  } finally {
-    queryClient.clear();
-    window.location.assign(redirectTo);
-  }
+export function startGoogleSignIn() {
+  // REMINDER: DO NOT HARDCODE THE URL, OR ADD ANY FALLBACKS OR REDIRECT URLS, THIS BREAKS THE AUTH
+  const redirectUrl = window.location.origin + "/";
+  window.location.href = `https://auth.emergentagent.com/?redirect=${encodeURIComponent(redirectUrl)}`;
 }

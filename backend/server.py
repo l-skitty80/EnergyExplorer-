@@ -11,6 +11,8 @@ from typing import List
 import uuid
 from datetime import datetime
 
+from routers.auth import router as auth_router
+
 
 ROOT_DIR = Path(__file__).parent
 load_dotenv(ROOT_DIR / '.env')
@@ -60,8 +62,8 @@ async def get_status_checks():
     status_checks = await db.status_checks.find().to_list(1000)
     return [StatusCheck(**status_check) for status_check in status_checks]
 
-# Include the router in the main app
-app.include_router(api_router)
+
+api_router.include_router(auth_router)
 
 app.add_middleware(
     CORSMiddleware,
@@ -77,3 +79,6 @@ logging.basicConfig(
     format='%(asctime)s - %(name)s - %(levelname)s - %(message)s'
 )
 logger = logging.getLogger(__name__)
+
+# Include the router last so every endpoint stays under the /api boundary.
+app.include_router(api_router)
